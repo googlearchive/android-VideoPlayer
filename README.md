@@ -16,7 +16,7 @@ audio focus system and pause playback if something else is playing.
 playback can continue in a minimized window while the user is
 in other apps.
 To learn more about `ExoPlayer`, `MediaSession`, Audio Focus, and PIP, 
-please read this [article on Medium](TK add link to medium article)
+please read this series of [articles on Medium](https://goo.gl/HpTnka)
 that goes into the details of these APIs.
 
 Pre-requisites

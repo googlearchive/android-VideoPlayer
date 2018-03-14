@@ -42,9 +42,9 @@ data class PlayerState(var window: Int = 0,
                        var position: Long = 0,
                        var whenReady: Boolean = true)
 
-class PlayerHolder(val context: Context,
-                   val playerState: PlayerState,
-                   val playerView: PlayerView) : AnkoLogger {
+class PlayerHolder(private val context: Context,
+                   private val playerState: PlayerState,
+                   private val playerView: PlayerView) : AnkoLogger {
     val audioFocusPlayer: ExoPlayer
 
     // Create the player instance.
@@ -118,7 +118,7 @@ class PlayerHolder(val context: Context,
      * For more info on ExoPlayer logging, please review this
      * [codelab](https://codelabs.developers.google.com/codelabs/exoplayer-intro/#5).
      */
-    fun attachLogging(exoPlayer: ExoPlayer) {
+    private fun attachLogging(exoPlayer: ExoPlayer) {
         // Show toasts on state changes.
         exoPlayer.addListener(object : Player.DefaultEventListener() {
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
@@ -148,12 +148,12 @@ class PlayerHolder(val context: Context,
             }
 
             fun getStateString(state: Int): String {
-                when (state) {
-                    Player.STATE_BUFFERING -> return "STATE_BUFFERING"
-                    Player.STATE_ENDED -> return "STATE_ENDED"
-                    Player.STATE_IDLE -> return "STATE_IDLE"
-                    Player.STATE_READY -> return "STATE_READY"
-                    else -> return "?"
+                return when (state) {
+                    Player.STATE_BUFFERING -> "STATE_BUFFERING"
+                    Player.STATE_ENDED -> "STATE_ENDED"
+                    Player.STATE_IDLE -> "STATE_IDLE"
+                    Player.STATE_READY -> "STATE_READY"
+                    else -> "?"
                 }
             }
         })

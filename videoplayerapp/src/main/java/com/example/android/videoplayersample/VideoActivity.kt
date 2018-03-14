@@ -19,6 +19,7 @@ package com.example.android.videoplayersample
 import android.app.PictureInPictureParams
 import android.content.res.Configuration
 import android.media.AudioManager
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.session.MediaSessionCompat
@@ -72,7 +73,7 @@ class VideoActivity : AppCompatActivity(), AnkoLogger {
     }
 
     // MediaSession related functions.
-    fun createMediaSession(): MediaSessionCompat = MediaSessionCompat(this, packageName)
+    private fun createMediaSession(): MediaSessionCompat = MediaSessionCompat(this, packageName)
 
     private fun createMediaSessionConnector(): MediaSessionConnector =
             MediaSessionConnector(mediaSession).apply {
@@ -88,48 +89,50 @@ class VideoActivity : AppCompatActivity(), AnkoLogger {
 
 
     // MediaSession related functions.
-    fun activateMediaSession() {
+    private fun activateMediaSession() {
         // Note: do not pass a null to the 3rd param below, it will cause a NullPointerException.
         // To pass Kotlin arguments to Java varargs, use the Kotlin spread operator `*`.
         mediaSessionConnector.setPlayer(playerHolder.audioFocusPlayer, null)
         mediaSession.isActive = true
     }
 
-    fun deactivateMediaSession() {
+    private fun deactivateMediaSession() {
         mediaSessionConnector.setPlayer(null, null)
         mediaSession.isActive = false
     }
 
-    fun releaseMediaSession() {
+    private fun releaseMediaSession() {
         mediaSession.release()
     }
 
     // ExoPlayer related functions.
-    fun createPlayer() {
+    private fun createPlayer() {
         playerHolder = PlayerHolder(this, playerState, exoplayerview_activity_video)
     }
 
-    fun startPlayer() {
+    private fun startPlayer() {
         playerHolder.start()
     }
 
-    fun stopPlayer() {
+    private fun stopPlayer() {
         playerHolder.stop()
     }
 
-    fun releasePlayer() {
+    private fun releasePlayer() {
         playerHolder.release()
     }
 
     // Picture in Picture related functions.
     override fun onUserLeaveHint() {
-        enterPictureInPictureMode(
-                with(PictureInPictureParams.Builder()) {
-                    val width = 16
-                    val height = 9
-                    setAspectRatio(Rational(width, height))
-                    build()
-                })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            enterPictureInPictureMode(
+                    with(PictureInPictureParams.Builder()) {
+                        val width = 16
+                        val height = 9
+                        setAspectRatio(Rational(width, height))
+                        build()
+                    })
+        }
     }
 
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean,
