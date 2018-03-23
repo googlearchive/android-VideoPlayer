@@ -1,0 +1,42 @@
+# GOOGLE SAMPLE PACKAGING DATA
+#
+# This file is used by Google as part of our samples packaging process.
+# End users may safely ignore this file. It has no relevance to other systems.
+---
+# Values: {DRAFT | PUBLISHED | INTERNAL | DEPRECATED | SUPERCEDED}
+status:       PUBLISHED
+
+# Optional, put additional explanation here for DEPRECATED or SUPERCEDED.
+# statusNote:
+
+# See http://go/sample-categories
+technologies: [Android, ExoPlayer]
+categories:   [Media]
+languages:    [Kotlin]
+solutions:    [Mobile]
+
+# May be omitted if unpublished
+github:       googlesamples/android-VideoPlayer
+
+# Values: BEGINNER | INTERMEDIATE | ADVANCED | EXPERT
+level:        INTERMEDIATE
+
+# Dimensions: 512x512, PNG fomrat
+icon: screenshots/template-icon.png
+
+# List of APIs that this sample should be listed under. Use authoritive,
+# names that are unique for the product in question. Examples:
+#
+# Android -    android:<class-name>
+# App Engine - gae-java:<class name>
+#              gae-python:<package>
+# Web Services - ws:<name of API from Cloud Console>
+apiRefs:
+    - android:android.support.v4.media.session.MediaSessionCompat
+    - android:android.app.PictureInPictureParams
+    - android:com.google.android.exoplayer2.SimpleExoPlayer
+    - android:com.google.android.exoplayer2.ui.PlayerView
+
+# Default: apache2. May be omitted for most samples.
+# Alternatives: apache2-android (for AOSP)
+license: apache2
